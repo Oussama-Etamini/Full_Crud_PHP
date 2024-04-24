@@ -37,7 +37,7 @@ body {
     border-radius: 4px;
   }
 
-  button {
+  .button {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 15px;
@@ -46,19 +46,19 @@ body {
     cursor: pointer;
   }
 
-  button:hover {
+  .button:hover {
     background-color: #45a049;
   }
 
-  a {
+  #login{
     color: #4caf50;
     text-decoration: none;
-    display: inline-block;
     margin-top: 10px;
     position: absolute;
     bottom: 7%;
   }
 
-  a:hover {
+  #login:hover {
     color: #45a049;
   }
+  

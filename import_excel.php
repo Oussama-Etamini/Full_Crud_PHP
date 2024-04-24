@@ -16,7 +16,7 @@ if (isset($_POST['save_data'])) {
         foreach ($data as $row) {
             $firstName = $row['0'];
             $lastName  = $row['1'];
-            $email     = $row['2'];
+            $email     =            $row['2'];
             $gender    = $row['3'];
 
             $user = "INSERT INTO users (first_name, last_name, email, gender) VALUES ('$firstName', '$lastName', '$email', '$gender')";

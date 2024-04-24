@@ -4,7 +4,7 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 $message = $_POST['message'];
 
-$message = "Name: " . $name . "\n Email: " . $email . "\n Message: " . $message;
+$message = "Name : " . $name . "\n Email : " . $email . "\n Message : " . $message;
 
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
@@ -30,9 +30,8 @@ try {
     $mail->Port       = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('from@example.com', 'Test');
+    $mail->setFrom('from@example.com', 'CRUD Application');
     $mail->addAddress('etaminioussama1@gmail.com'); //Add a recipient
-    $mail->addAddress('ellen@example.com'); //Name is optional
 
     //Content
     $mail->isHTML(true);  //Set email format to HTML

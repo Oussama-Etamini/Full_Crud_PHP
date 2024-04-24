@@ -9,13 +9,17 @@ if (!empty($_SESSION["id"])) {
 }
 // sorting the names ASC
 $tablename = 'users';
-$sortField = 'first_name'; // Default sort field
-$sortOrder = 'ASC'; // Default sort order
+// $sortField = 'first_name'; // Default sort field
+// $sortOrder = 'ASC'; // Default sort order
+$sortField = isset($_GET['sortField']) ? $_GET['sortField'] : 'first_name';
+$sortOrder = isset($_GET['sortOrder']) && in_array($_GET['sortOrder'], ['ASC', 'DESC']) ? $_GET['sortOrder'] : 'ASC';
 $sql = "SELECT * FROM `$tablename` ORDER BY `$sortField` $sortOrder";
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,11 +38,16 @@ $sql = "SELECT * FROM `$tablename` ORDER BY `$sortField` $sortOrder";
             background: transparent;
             max-width: 190px;
         }
+
         .input:active {
             box-shadow: 2px 2px 15px #0c4f1b inset;
         }
+        th{
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-light justify-content-between fs-3 mb-5" style="background-color: #4caf50;">
         <h3 class="mx-3"><?php echo $user["name"]; ?></h3>
@@ -71,11 +80,11 @@ $sql = "SELECT * FROM `$tablename` ORDER BY `$sortField` $sortOrder";
         <table class="table table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Gender</th>
+                    <th scope="col" onclick="sortItems('id')">ID</th>
+                    <th scope="col" onclick="sortItems('first_name')">First Name</th>
+                    <th scope="col" onclick="sortItems('last_name')">Last Name</th>
+                    <th scope="col" onclick="sortItems('email')">Email</th>
+                    <th scope="col" onclick="sortItems('gender')">Gender</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -121,7 +130,7 @@ $sql = "SELECT * FROM `$tablename` ORDER BY `$sortField` $sortOrder";
             <ul class="pagination my-2">
                 <?php
                 for ($i = 1; $i <= $total_pages; $i++) {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="index.php?page=' . $i . '&sortField=' . $sortField . '&sortOrder=' . $sortOrder . '">' . $i . '</a></li>';
                 }
                 ?>
             </ul>
@@ -131,6 +140,18 @@ $sql = "SELECT * FROM `$tablename` ORDER BY `$sortField` $sortOrder";
             </form>
         </nav>
     </div>
+    <script>
+        function sortItems(field) {
+            let sortOrder = '<?php echo $sortOrder === "ASC" ?>';
+        // If the clicked field is already the current sort field, toggle the sort order
+        if (field === '<?php echo $sortField; ?>') {
+            sortOrder = '<?php echo $sortOrder === "ASC" ? "DESC" : "ASC"; ?>';
+        }
+            window.location.href = 'index.php?sortField=' + field + '&sortOrder=' + sortOrder;
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

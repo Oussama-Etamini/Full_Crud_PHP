@@ -5,13 +5,12 @@ if (!empty($_SESSION["id"])) {
   header("Location: index.php");
   exit;
 }
-
 $login = new Login();
 
 if (isset($_POST["submit"])) {
   $result = $login->login($_POST["username"], $_POST["password"]);
   if ($result == 1) {
-    $_SESSION["login"] = true;
+    // $_SESSION["login"] = true;
     $_SESSION["id"] = $login->idUser();
     header("Location: index.php");
     exit;
@@ -78,6 +77,7 @@ if (isset($_POST["submit"])) {
       });
     // Render the HTML5 QR code scanner and bind the onScanSuccess function to handle scan results
     html5QrcodeScanner.render(onScanSuccess);
-</script> 
+  </script>
 </body>
+
 </html>
